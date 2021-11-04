@@ -15,8 +15,8 @@ function connect() {
         server: "./"
     });
 
+    gulp.watch("src/js/*.js", js);
     gulp.watch("src/css/*.css", css);
-    gulp.watch("src/js/*.cs", js);
     gulp.watch("./*.html").on("change", browserSync.reload)
 }
 
@@ -33,14 +33,13 @@ function css() {
 
 // Tache JS
 function js() {
-    return gulp.src("src/js/*js")
+    return gulp.src("src/js/*.js")
         .pipe(babel())
         .pipe(uglify())
         .pipe(concat("app.js"))
         .pipe(rename({ suffix: '.min' }))
         .pipe(gulp.dest("dist/js"))
         .pipe(browserSync.stream());
-
 }
 
 //Tache img
